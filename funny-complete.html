@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Funny People Only — Jokes, roasts, useless facts, fake quotes, and impossible choices. One file, zero dependencies, works offline.">
+<meta name="theme-color" content="#0d0d0d">
+<title>🤡 Funny People Only</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap"></noscript>
+<link rel="manifest" href="data:application/json,{"name":"Funny People Only","short_name":"FunnySite","theme_color":"#ff006e","background_color":"#0a0a0f","display":"standalone","icons":[{"src":"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤡</text></svg>","sizes":"any","type":"image/svg+xml"}]}">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤡</text></svg>">
+<style>
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; } }
+:root { --bg:#0a0a0f; --bg-elevated:#12121f; --card:#161628; --card-hover:#1c1c34; --border:#2a2a4a; --fg:#f0f0f5; --fg-muted:#8888a0; --fg-dim:#555570; --accent:#ff006e; --accent-2:#8338ec; --accent-3:#3a86ff; --accent-4:#ffbe0b; --accent-5:#06ffa5; --radius-sm:8px; --radius-md:16px; --radius-lg:24px; --radius-full:999px; --shadow-sm:0 2px 8px rgba(0,0,0,.3); --shadow-md:0 8px 24px rgba(0,0,0,.4); --shadow-lg:0 16px 48px rgba(0,0,0,.5); --shadow-glow:0 0 32px rgba(255,0,110,.3); --transition-fast:150ms cubic-bezier(.2,.8,.2,1); --transition-base:250ms cubic-bezier(.2,.8,.2,1); --transition-slow:400ms cubic-bezier(.2,.8,.2,1); --font-sans:'Space Grotesk',system-ui,-apple-system,sans-serif; --font-mono:'JetBrains Mono','Fira Code',monospace; --container:100%; --header-h:64px; }
+@media (min-width:480px){:root{--container:100%}}
+@media (min-width:768px){:root{--container:720px}}
+@media (min-width:1024px){:root{--container:960px}}
+@media (min-width:1280px){:root{--container:1140px}}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{min-height:100vh;background:var(--bg);color:var(--fg);font-family:var(--font-sans);font-size:clamp(14px,2.5vw,16px);line-height:1.6;overflow-x:hidden;perspective:1000px;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;scrollbar-gutter:stable both-edges}
+body.modal-open{overflow:hidden}
+img,video,canvas{max-width:100%;height:auto;display:block}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+a{color:var(--accent-3);text-decoration:none;transition:color var(--transition-fast)}a:hover{color:var(--accent);text-decoration:underline}a:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+#bg{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.6}
+.emoji-layer{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+.emoji{position:absolute;font-size:clamp(1.5rem,3vw,2.5rem);animation:fall linear forwards;user-select:none;will-change:transform,opacity}
+@keyframes fall{to{transform:translateY(100vh) rotate(720deg);opacity:0}}
+.header{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--header-h);display:flex;align-items:center;justify-content:center;padding:0 16px;background:linear-gradient(180deg,rgba(10,10,15,.95) 0%,transparent 100%);backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--border)}
+.nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;width:100%;max-width:var(--container)}
+.nav-btn{display:inline-flex;align-items:center;gap:6px;padding:10px 18px;font-size:clamp(12px,2vw,14px);font-weight:600;color:var(--fg-muted);background:var(--card);border:1px solid var(--border);border-radius:var(--radius-full);transition:all var(--transition-base);white-space:nowrap}
+.nav-btn:hover,.nav-btn:focus-visible{color:var(--accent);border-color:var(--accent);background:var(--card-hover);transform:translateY(-2px);box-shadow:var(--shadow-glow)}
+.nav-btn.active{color:var(--bg);background:linear-gradient(135deg,var(--accent),var(--accent-2));border-color:transparent;box-shadow:var(--shadow-glow)}
+.nav-btn:active{transform:translateY(0) scale(0.98)}
+#main{padding-top:calc(var(--header-h)+24px);padding-bottom:120px;max-width:var(--container);margin:0 auto;padding-left:16px;padding-right:16px}
+.hero{text-align:center;padding:clamp(40px,10vw,80px) 16px}
+.hero h1{font-size:clamp(2.2rem,8vw,5.5rem);font-weight:700;line-height:1.05;letter-spacing:-0.02em;background:linear-gradient(135deg,var(--accent) 0%,var(--accent-2) 40%,var(--accent-3) 70%,var(--accent-4) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;animation:titleFloat 4s ease-in-out infinite}
+@keyframes titleFloat{0%,100%{transform:translateY(0) rotate(-0.5deg)}50%{transform:translateY(-4px) rotate(0.5deg)}}
+.hero-tagline{margin-top:16px;font-size:clamp(1rem,2.5vw,1.25rem);color:var(--fg-muted);font-weight:400;animation:fadeInUp 0.8s ease-out 0.3s both}
+.hero-stats{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:32px}
+.stat{display:flex;flex-direction:column;align-items:center;gap:4px;padding:16px 24px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-md);transition:all var(--transition-base)}
+.stat:hover{border-color:var(--accent);transform:translateY(-2px)}
+.stat-num{font-family:var(--font-mono);font-size:clamp(1.5rem,4vw,2.5rem);font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent-3));-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat-label{font-size:clamp(0.7rem,1.5vw,0.8rem);text-transform:uppercase;letter-spacing:0.1em;color:var(--fg-dim)}
+.panel{opacity:0;transform:translateY(30px);transition:opacity var(--transition-slow),transform var(--transition-slow);will-change:opacity,transform}
+.panel:not([hidden]){opacity:1;transform:translateY(0)}
+.panel-header{text-align:center;margin-bottom:32px}
+.panel-header h2{font-size:clamp(1.5rem,4vw,2.5rem);font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent-3));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:8px}
+.panel-desc{color:var(--fg-muted);font-size:clamp(0.9rem,2vw,1rem)}
+.grid{display:grid;grid-template-columns:1fr;gap:16px}
+@media (min-width:480px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:768px){.grid{grid-template-columns:repeat(3,1fr)}}
+@media (min-width:1024px){.grid{grid-template-columns:repeat(3,1fr);gap:20px}}
+.card{position:relative;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:clamp(20px,4vw,28px);overflow:hidden;transition:all var(--transition-base);cursor:pointer;isolation:isolate}
+.card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--accent),var(--accent-2),var(--accent-3));opacity:0;transition:opacity var(--transition-base);z-index:-1}
+.card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent-2),var(--accent-3));transform:scaleX(0);transform-origin:left;transition:transform var(--transition-base);border-radius:var(--radius-lg) var(--radius-lg) 0 0}
+.card:hover{transform:translateY(-6px) rotateX(2deg);border-color:var(--accent);box-shadow:var(--shadow-lg),var(--shadow-glow)}
+.card:hover::before{opacity:0.03}
+.card:hover::after{transform:scaleX(1)}
+.card:active{transform:translateY(-2px) scale(0.99)}
+.card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.card h3{font-size:clamp(1.1rem,2.5vw,1.3rem);font-weight:700;color:var(--accent);margin-bottom:8px}
+.card p{font-size:clamp(0.85rem,1.8vw,0.95rem);color:var(--fg-muted);line-height:1.5;margin-bottom:16px}
+.card-btn{width:100%;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 20px;font-size:clamp(0.9rem,2vw,1rem);font-weight:700;color:var(--bg);background:linear-gradient(135deg,var(--accent),var(--accent-2));border-radius:var(--radius-md);transition:all var(--transition-fast);border:none}
+.card-btn:hover{transform:scale(1.02);box-shadow:0 8px 24px rgba(255,0,110,.4)}
+.card-btn:active{transform:scale(0.98)}
+.card-btn:focus-visible{outline:2px solid var(--accent-4);outline-offset:2px}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);z-index:1000;max-width:calc(100%-32px);padding:18px 24px;background:var(--card);border:2px solid var(--accent);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg),var(--shadow-glow);opacity:0;pointer-events:none;transition:all 0.4s cubic-bezier(.34,1.56,.64,1);text-align:center;font-size:clamp(0.95rem,2.5vw,1.1rem);line-height:1.5}
+@media (min-width:480px){.toast{max-width:360px}}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1;pointer-events:auto;animation:toastPop 0.5s cubic-bezier(.34,1.56,.64,1)}
+@keyframes toastPop{0%{transform:translateX(-50%) translateY(100px) scale(0.8);opacity:0}50%{transform:translateX(-50%) translateY(-8px) scale(1.02)}100%{transform:translateX(-50%) translateY(0) scale(1);opacity:1}}
+.prank-btn{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);z-index:200;padding:18px 40px;font-size:clamp(1rem,2.5vw,1.2rem);font-weight:800;color:var(--bg);background:linear-gradient(135deg,#ff6b6b,#ee5a24);border-radius:var(--radius-full);box-shadow:0 10px 30px rgba(238,90,36,.4);transition:all var(--transition-base);animation:pulse 2.5s ease-in-out infinite}
+@media (max-height:600px){.prank-btn{bottom:24px}}
+.prank-btn:hover{transform:translateX(-50%) scale(1.05);box-shadow:0 15px 40px rgba(238,90,36,.6)}
+.prank-btn:active{transform:translateX(-50%) scale(0.95);animation:none}
+.prank-btn:focus-visible{outline:3px solid var(--accent-4);outline-offset:4px}
+@keyframes pulse{0%,100%{box-shadow:0 10px 30px rgba(238,90,36,.4)}50%{box-shadow:0 10px 30px rgba(238,90,36,.7),0 0 0 12px rgba(238,90,36,.08)}}
+.egg{position:fixed;bottom:24px;right:24px;width:56px;height:56px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;background:linear-gradient(135deg,#ffd700,#ff8c00);border-radius:50%;box-shadow:0 6px 20px rgba(255,215,0,.4);animation:eggBounce 3s ease-in-out infinite;transition:transform var(--transition-fast);z-index:200}
+.egg:hover{transform:scale(1.15) rotate(12deg)}
+.egg:active{transform:scale(0.9)}
+.egg:focus-visible{outline:3px solid var(--accent-4);outline-offset:4px}
+@keyframes eggBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.footer{margin-top:60px;padding:40px 16px;text-align:center;border-top:1px solid var(--border);color:var(--fg-dim);font-size:clamp(0.8rem,1.8vw,0.9rem)}
+.footer a{color:var(--fg-muted)}
+.footer a:hover{color:var(--accent)}
+.footer-quote{margin-top:12px;font-style:italic;color:var(--accent-2);font-size:clamp(0.8rem,1.8vw,0.9rem);opacity:0.8}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+.shake{animation:shake 0.5s ease-in-out}
+::-webkit-scrollbar{width:8px;height:8px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}::-webkit-scrollbar-thumb:hover{background:var(--accent)}
+::selection{background:rgba(255,0,110,.3);color:var(--fg)}
+.modal-overlay{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.9);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;visibility:hidden;transition:all var(--transition-base)}
+.modal-overlay.show{opacity:1;visibility:visible}
+.modal{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);max-width:90vw;max-height:85vh;width:100%;max-width:600px;overflow:hidden;transform:scale(0.9);transition:transform var(--transition-base)}
+.modal-overlay.show .modal{transform:scale(1)}
+.modal-header{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid var(--border);background:linear-gradient(135deg,var(--accent),var(--accent-2));color:var(--bg)}
+.modal-header h3{font-size:clamp(1.1rem,3vw,1.4rem);font-weight:700;display:flex;align-items:center;gap:10px}
+.modal-close{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,255,255,.1);color:var(--bg);font-size:1.5rem;transition:all var(--transition-fast)}
+.modal-close:hover{background:rgba(255,255,255,.2);transform:rotate(90deg)}
+.modal-body{padding:24px;overflow-y:auto;max-height:60vh}
+.modal-item{padding:16px 0;border-bottom:1px solid var(--border);animation:fadeInUp 0.4s ease-out backwards}
+.modal-item:last-child{border-bottom:none}
+.modal-item:nth-child(1){animation-delay:0.05s}
+.modal-item:nth-child(2){animation-delay:0.1s}
+.modal-item:nth-child(3){animation-delay:0.15s}
+.modal-item:nth-child(4){animation-delay:0.2s}
+.modal-item:nth-child(5){animation-delay:0.25s}
+.modal-item:nth-child(6){animation-delay:0.3s}
+.modal-item:nth-child(7){animation-delay:0.35s}
+.modal-item:nth-child(8){animation-delay:0.4s}
+.modal-item:nth-child(9){animation-delay:0.45s}
+.modal-item:nth-child(10){animation-delay:0.5s}
+.modal-item .item-icon{font-size:1.5rem;margin-bottom:8px;display:block}
+.modal-item .item-text{font-size:clamp(0.95rem,2vw,1.1rem);line-height:1.6;color:var(--fg)}
+.modal-item .item-category{font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--accent);margin-bottom:6px;display:block}
+.modal-actions{display:flex;gap:12px;padding:20px 24px;border-top:1px solid var(--border);background:var(--bg-elevated);justify-content:center;flex-wrap:wrap}
+.modal-btn{padding:12px 24px;font-weight:700;border-radius:var(--radius-md);transition:all var(--transition-fast)}
+.modal-btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:var(--bg)}
+.modal-btn.primary:hover{box-shadow:0 8px 24px rgba(255,0,110,.4);transform:scale(1.02)}
+.modal-btn.secondary{background:var(--card);border:1px solid var(--border);color:var(--fg)}
+.modal-btn.secondary:hover{border-color:var(--accent);color:var(--accent)}
+@media print{.header,.prank-btn,.egg,.toast,#bg,.emoji-layer,.modal-overlay{display:none!important}.panel{display:none!important}.panel:not([hidden]){display:block!important}body{background:white;color:black}.card{border:1px solid #ccc;background:white;box-shadow:none}.card-btn{background:#333;color:white}}
+</style>
+</head>
+<body>
+<canvas id="bg" aria-hidden="true"></canvas>
+<div class="emoji-layer" id="emojiLayer" aria-hidden="true"></div>
+
+<header class="header" role="banner">
+<nav class="nav" id="nav" role="navigation" aria-label="Main categories">
+<button class="nav-btn active" data-target="jokes" aria-controls="jokes" aria-selected="true">🎭 Jokes</button>
+<button class="nav-btn" data-target="facts" aria-controls="facts" aria-selected="false">🧠 Facts</button>
+<button class="nav-btn" data-target="roasts" aria-controls="roasts" aria-selected="false">🔥 Roasts</button>
+<button class="nav-btn" data-target="quotes" aria-controls="quotes" aria-selected="false">💭 Quotes</button>
+<button class="nav-btn" data-target="wyr" aria-controls="wyr" aria-selected="false">🤔 WYR</button>
+</nav>
+</header>
+
+<main id="main" role="main">
+<section class="hero" aria-labelledby="hero-title">
+<h1 id="hero-title">Funny People Only</h1>
+<p class="hero-tagline">If you're not laughing, you're not doing it right</p>
+<div class="hero-stats" aria-live="polite">
+<span class="stat" id="totalJokes"><span class="stat-num">0</span><span class="stat-label">Jokes</span></span>
+<span class="stat" id="totalFacts"><span class="stat-num">0</span><span class="stat-label">Facts</span></span>
+<span class="stat" id="totalRoasts"><span class="stat-num">0</span><span class="stat-label">Roasts</span></span>
+<span class="stat" id="totalQuotes"><span class="stat-num">0</span><span class="stat-label">Quotes</span></span>
+</div>
+</section>
+
+<section id="jokes" class="panel" role="region" aria-labelledby="jokes-title">
+<header class="panel-header">
+<h2 id="jokes-title">🎭 Joke Generator</h2>
+<p class="panel-desc">Six flavors. Infinite eye-rolls.</p>
+</header>
+<div class="grid" id="jokesGrid"></div>
+</section>
+
+<section id="facts" class="panel" role="region" aria-labelledby="facts-title" hidden>
+<header class="panel-header">
+<h2 id="facts-title">🧠 Useless Facts</h2>
+<p class="panel-desc">Knowledge you never needed. Guaranteed.</p>
+</header>
+<div class="grid" id="factsGrid"></div>
+</section>
+
+<section id="roasts" class="panel" role="region" aria-labelledby="roasts-title" hidden>
+<header class="panel-header">
+<h2 id="roasts-title">🔥 Gentle Roasts</h2>
+<p class="panel-desc">Consensual verbal violence. You asked for it.</p>
+</header>
+<div class="grid" id="roastsGrid"></div>
+</section>
+
+<section id="quotes" class="panel" role="region" aria-labelledby="quotes-title" hidden>
+<header class="panel-header">
+<h2 id="quotes-title">💭 Fake Deep Quotes</h2>
+<p class="panel-desc">Sounds profound. Means absolutely nothing.</p>
+</header>
+<div class="grid" id="quotesGrid"></div>
+</section>
+
+<section id="wyr" class="panel" role="region" aria-labelledby="wyr-title" hidden>
+<header class="panel-header">
+<h2 id="wyr-title">🤔 Would You Rather</h2>
+<p class="panel-desc">Impossible choices. No right answers.</p>
+</header>
+<div class="grid" id="wyrGrid"></div>
+</section>
+</main>
+
+<aside class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></aside>
+
+<button class="prank-btn" id="prankBtn" aria-label="Trigger a random prank" type="button">🚨 DO NOT PRESS 🚨</button>
+
+<button class="egg" id="egg" aria-label="Easter egg" type="button">🥚</button>
+
+<footer class="footer" role="contentinfo">
+<p>Made with chaos for funny people • Zero dependencies • Works offline • <a href="https://github.com" target="_blank" rel="noopener">Fork on GitHub</a></p>
+<p id="footerQuote" class="footer-quote"></p>
+</footer>
+
+<!-- Modals -->
+<div class="modal-overlay" id="jokeModal" role="dialog" aria-modal="true" aria-labelledby="jokeModalTitle">
+<div class="modal">
+<div class="modal-header">
+<h3 id="jokeModalTitle">🎭 Jokes</h3>
+<button class="modal-close" aria-label="Close">&times;</button>
+</div>
+<div class="modal-body" id="jokeModalBody"></div>
+<div class="modal-actions">
+<button class="modal-btn primary" id="jokeAnother">Another One</button>
+<button class="modal-btn secondary" id="jokeClose">Close</button>
+</div>
+</div>
+</div>
+
+<div class="modal-overlay" id="factModal" role="dialog" aria-modal="true" aria-labelledby="factModalTitle">
+<div class="modal">
+<div class="modal-header">
+<h3 id="factModalTitle">🧠 Facts</h3>
+<button class="modal-close" aria-label="Close">&times;</button>
+</div>
+<div class="modal-body" id="factModalBody"></div>
+<div class="modal-actions">
+<button class="modal-btn primary" id="factAnother">Another One</button>
+<button class="modal-btn secondary" id="factClose">Close</button>
+</div>
+</div>
+</div>
+
+<div class="modal-overlay" id="roastModal" role="dialog" aria-modal="true" aria-labelledby="roastModalTitle">
+<div class="modal">
+<div class="modal-header">
+<h3 id="roastModalTitle">🔥 Roasts</h3>
+<button class="modal-close" aria-label="Close">&times;</button>
+</div>
+<div class="modal-body" id="roastModalBody"></div>
+<div class="modal-actions">
+<button class="modal-btn primary" id="roastAnother">Another One</button>
+<button class="modal-btn secondary" id="roastClose">Close</button>
+</div>
+</div>
+</div>
+
+<div class="modal-overlay" id="quoteModal" role="dialog" aria-modal="true" aria-labelledby="quoteModalTitle">
+<div class="modal">
+<div class="modal-header">
+<h3 id="quoteModalTitle">💭 Quotes</h3>
+<button class="modal-close" aria-label="Close">&times;</button>
+</div>
+<div class="modal-body" id="quoteModalBody"></div>
+<div class="modal-actions">
+<button class="modal-btn primary" id="quoteAnother">Another One</button>
+<button class="modal-btn secondary" id="quoteClose">Close</button>
+</div>
+</div>
+</div>
+
+<div class="modal-overlay" id="wyrModal" role="dialog" aria-modal="true" aria-labelledby="wyrModalTitle">
+<div class="modal">
+<div class="modal-header">
+<h3 id="wyrModalTitle">🤔 Would You Rather</h3>
+<button class="modal-close" aria-label="Close">&times;</button>
+</div>
+<div class="modal-body" id="wyrModalBody"></div>
+<div class="modal-actions">
+<button class="modal-btn primary" id="wyrAnother">Another One</button>
+<button class="modal-btn secondary" id="wyrClose">Close</button>
+</div>
+</div>
+</div>
+
+<script>
+// =========================================
+// DATA - All content in one place
+// =========================================
+const DATA = {
+  jokes: {
+    dad: { icon: '👨', label: 'Dad Jokes', desc: 'So bad they\'re good. Eye-roll guaranteed.', btn: 'Hit Me', items: ["I'm reading a book on anti-gravity. It's impossible to put down.", "Did you hear about the claustrophobic astronaut? He just needed a little space.", "Why don't skeletons fight each other? They don't have the guts.", "I used to hate facial hair, but then it grew on me.", "What do you call a fake noodle? An impasta.", "Why did the scarecrow win an award? He was outstanding in his field.", "I'm on a whiskey diet. I've lost three days already.", "What do you call a bear with no teeth? A gummy bear.", "Parallel lines have so much in common. It's a shame they'll never meet.", "My wife said I should do lunges to stay in shape. That would be a big step forward."] },
+    programming: { icon: '💻', label: 'Programming', desc: 'Only devs will get these. Sorry not sorry.', btn: 'Compile', items: ["Why do programmers prefer dark mode? Because light attracts bugs.", "How many programmers does it take to change a light bulb? None, that's a hardware problem.", "A SQL query walks into a bar, walks up to two tables and asks... 'Can I join you?'", "Why did the programmer quit his job? He didn't get arrays.", "There are 10 types of people: those who understand binary and those who don't.", "A programmer's wife tells him: 'Go to the store and buy a loaf of bread. If they have eggs, buy a dozen.' He returns with 13 loaves.", "Why do Java developers wear glasses? Because they don't C#.", "My code works, I have no idea why. My code doesn't work, I have no idea why.", "Rubber duck debugging: because the duck knows more than your PM.", "It works on my machine™ — the universal deployment strategy."] },
+    dark: { icon: '💀', label: 'Dark Humor', desc: 'For the morally flexible. Don\'t @ me.', btn: 'Risk It', items: ["My grandfather has the heart of a lion and a lifetime ban from the zoo.", "I have a stepladder. I never knew my real ladder.", "Give a man a plane ticket, he flies for a day. Push him out at 30,000 feet, he flies for the rest of his life.", "My therapist says I have a preoccupation with vengeance. We'll see about that.", "The cemetery is so popular, people are dying to get in.", "I visited my friend at the hospital. He's on a liquid diet. The jelly was wobbling.", "Why don't cemeteries have WiFi? Because people are dying to get in.", "My favorite childhood memory is building sandcastles with my grandfather. Until my mother hid his urn.", "I was digging in the garden when I found a chest full of gold coins. I was about to run inside and tell my wife, but then I remembered why I was digging the hole.", "The doctor gave me one year to live, so I shot him. The judge gave me 15 years. Problem solved."] },
+    pun: { icon: '📝', label: 'Puns', desc: 'Wordplay so sharp it cuts.', btn: 'Slice', items: ["I used to be a banker but I lost interest.", "I'm reading a book about mazes. I got lost in it.", "The guy who invented the door knocker got a no-bell prize.", "I'm on a seafood diet. I see food and I eat it.", "Did you hear about the mathematician who's afraid of negative numbers? He'll stop at nothing to avoid them.", "I told my wife she was drawing her eyebrows too high. She looked surprised.", "What do you call a factory that makes okay products? A satisfactory.", "I'm terrified of elevators. I'm taking steps to avoid them.", "The rotation of earth really makes my day.", "I bought some shoes from a drug dealer. I don't know what he laced them with but I've been tripping all day."] },
+    antijoke: { icon: '😐', label: 'Anti-Jokes', desc: 'The punchline is there is no punchline.', btn: 'Whatever', items: ["A horse walks into a bar. The bartender asks, 'Why the long face?' The horse, incapable of understanding human language, shits on the floor and leaves.", "What did the farmer say when he lost his tractor? 'Where's my tractor?'", "Why did the boy drop his ice cream? Because he was hit by a bus.", "Knock knock. Who's there? Dave. Dave who? Dave from work, I left my laptop there.", "A man walks into a bar. His alcohol dependency is tearing his family apart.", "What's red and smells like blue paint? Red paint.", "Why did the girl fall off the swing? Because she had no arms.", "What do you call a dog with no legs? Doesn't matter, it's not coming.", "Roses are red, violets are blue, I have a gun, get in the van.", "A duck walks into a pharmacy and says 'Put it on my bill.' The pharmacist says 'We don't do that.' The duck leaves."] },
+    oneliner: { icon: '⚡', label: 'One-Liners', desc: 'Quick. Painful. Effective.', btn: 'Zing', items: ["I threw a boomerang a few years ago. I now live in constant fear.", "My wife told me to stop impersonating a flamingo. I had to put my foot down.", "I invented a new word: Plagiarism.", "Velcro — what a rip-off.", "I'm not lazy, I'm on energy-saving mode.", "The early bird gets the worm, but the second mouse gets the cheese.", "I'm not arguing, I'm just explaining why I'm right.", "My bed is a magical place where I suddenly remember everything I forgot to do.", "I don't need a hair stylist, my pillow gives me a new hairstyle every morning.", "Common sense is like deodorant. The people who need it most never use it."] }
+  },
+  facts: {
+    animal: { icon: '🦙', label: 'Animals', desc: 'Nature is weird. Let me prove it.', btn: 'Teach Me', items: ["Wombats poop cubes. Actual cubes. So they don't roll away.", "A group of flamingos is called a 'flamboyance'.", "Otters hold hands while sleeping so they don't drift apart.", "Cows have best friends and get depressed when separated.", "A shrimp's heart is in its head.", "Turtles can breathe through their butts.", "Penguins propose with a pebble.", "Octopuses have three hearts and blue blood.", "A snail can sleep for three years.", "Elephants are the only mammals that can't jump."] },
+    history: { icon: '🏛️', label: 'History', desc: 'Humans have always been chaotic.', btn: 'Time Travel', items: ["Cleopatra lived closer in time to the iPhone than to the building of the Great Pyramid.", "The last execution by guillotine in France was in 1977 — same year Star Wars came out.", "Oxford University is older than the Aztec Empire.", "Ketchup was sold as medicine in the 1830s.", "The shortest war lasted 38 minutes (Britain vs Zanzibar, 1896).", "Ancient Romans used urine as mouthwash.", "The Great Emu War (1932): Australia lost to emus.", "Vikings didn't wear horned helmets — that was a 19th century opera costume.", "The Eiffel Tower was meant to be temporary.", "President Garfield could write Latin with one hand and Greek with the other simultaneously."] },
+    science: { icon: '🔬', label: 'Science', desc: 'Reality is stranger than fiction.', btn: 'Expand Brain', items: ["Bananas are berries. Strawberries are not.", "There are more trees on Earth than stars in the Milky Way.", "A day on Venus is longer than its year.", "Honey never spoils. Edible 3000-year-old honey exists.", "Your stomach gets a new lining every few days or it would digest itself.", "Octopuses have nine brains and blue blood.", "A single cloud can weigh over a million pounds.", "Hot water freezes faster than cold water (Mpemba effect).", "You're made of stardust. Literally.", "The human brain named itself."] },
+    space: { icon: '🪐', label: 'Space', desc: 'The void has jokes too.', btn: 'Launch', items: ["A day on Venus is longer than a year on Venus.", "Neutron stars can spin 600 times per second.", "There's a planet where it rains glass sideways at 5400 mph.", "The footprints on the Moon will last 100 million years.", "One million Earths fit inside the Sun.", "Space smells like seared steak and raspberries (astronauts say).", "A teaspoon of neutron star weighs 6 billion tons.", "There are more stars than grains of sand on Earth.", "Saturn's rings are 90% water ice.", "You get taller in space (spine expands)."] },
+    food: { icon: '🍕', label: 'Food', desc: 'You eat weird stuff daily.', btn: 'Digest', items: ["Honey is bee vomit.", "Cashews grow on apples.", "Pineapples take 2-3 years to grow.", "Bananas are curved because they grow toward the sun.", "Carrots were originally purple.", "Almonds are seeds, not nuts.", "Peanuts aren't nuts, they're legumes.", "Watermelons are 92% water.", "Apples float because 25% air.", "Broccoli has more protein per calorie than steak."] },
+    body: { icon: '🧠', label: 'Body', desc: 'Your meat suit is wild.', btn: 'Inspect', items: ["Your nose is always in your vision. Your brain just ignores it.", "You produce ~1L of saliva daily.", "Your tongue print is unique like fingerprints.", "Babies have 300 bones, adults 206 (they fuse).", "You're 1cm taller in the morning.", "The human eye can distinguish 10 million colors.", "Your liver can regenerate from 25% of its tissue.", "You shed 40lbs of skin in a lifetime.", "Your blood vessels could circle Earth 2.5x.", "You blink ~4.2 million times a year."] }
+  },
+  roasts: {
+    self: { icon: '🪞', label: 'Self Roast', desc: 'Roast me harder, daddy.', btn: 'Destroy Me', items: ["You're the reason the gene pool needs a lifeguard.", "You have the perfect face for radio. And the perfect voice for silent films.", "You're not stupid, you just have bad luck thinking.", "I'd explain it to you but I don't have crayons.", "You're the human equivalent of a participation trophy.", "Your secrets are safe with me. I never listen.", "You bring everyone so much joy when you leave the room.", "I'm not saying you're dumb, but you'd need a GPS to find your own ass with both hands.", "You're proof that evolution can go in reverse.", "If ignorance is bliss, you must be the happiest person alive."] },
+    code: { icon: '💻', label: 'Code Roast', desc: 'Your git history called. It\'s disappointed.', btn: 'Lint My Soul', items: ["Your code works? Congrats, you've achieved the bare minimum.", "Your variable names: x, y, z, temp, temp2, final_final_v2. Masterpiece.", "Comments? We don't do that here. The code IS the documentation.", "'It works on my machine' — the universal deployment strategy.", "Your commit messages: 'fix', 'fix2', 'fix3', 'please work', 'final', 'final_final'.", "Copy-paste from Stack Overflow? More like Copy-paste from Hope Overflow.", "Your CSS: !important everywhere. Because specificity is for people who plan.", "console.log debugging: the only testing framework you know.", "Technical debt? You call it 'features for v2'.", "Your regex is write-only. Nobody reads it twice. Not even you."] },
+    life: { icon: '🎭', label: 'Life Roast', desc: 'Your choices. All of them.', btn: 'Judge Me', items: ["Your life choices called. They want a refund.", "You're the main character in a show nobody watches.", "Your procrastination has procrastination.", "You treat deadlines like suggestions.", "Your '5 more minutes' is a unit of currency.", "You have the attention span of a goldfish on espresso.", "Your diet is 80% anxiety, 20% caffeine.", "You're not 'busy', you're just disorganized.", "Your sleep schedule is a cry for help.", "You've started 47 hobbies. Finished 0."] },
+    browser: { icon: '🌐', label: 'Browser Roast', desc: 'I see your 47 tabs. We need to talk.', btn: 'Expose Me', items: ["47 tabs open. You read 0 of them.", "Your bookmarks bar is a graveyard of 'read later'.", "Incognito mode doesn't hide your shame from your ISP.", "You have 12 extensions. You use 2.", "Your download folder: 3,847 files. 3,840 are 'Screenshot (1).png'.", "You search 'how to center a div' weekly.", "Your autocomplete knows you better than your therapist.", "You have a tab from 2019 'just in case'.", "Dark mode at 3AM. Your retinas called, they quit.", "You customize your terminal more than you code."] },
+    productivity: { icon: '📋', label: 'Productivity', desc: 'You\'re reading this instead of working.', btn: 'Call Me Out', items: ["You're reading this instead of working.", "'Quick break' — 3 hours ago.", "Your to-do list has a to-do list.", "You organize your Notion workspace instead of doing work.", "Pomodoro: 25 min work, 3 hours 'research'.", "You've optimized your workflow to do less work faster.", "'I'll start Monday' — every Monday since 2019.", "You have 47 productivity apps. Productivity: 0.", "You color-code your calendar. The colors are the only work done.", "You're 'waiting for inspiration'. It's not coming."] },
+    social: { icon: '💬', label: 'Social Roast', desc: 'Your last text was cringe. I know.', btn: 'Cringe Check', items: ["Your last text: 'k'. Conversation ender supreme.", "You rehearse conversations in the shower. You still mess them up.", "You wave back at someone waving behind you.", "'You too' — waiter: 'Enjoy your meal'.", "You laugh at jokes you don't understand.", "Your phone screen time: 8hrs. 'I don't have time'.", "You type 'haha' with a straight face.", "You stalk your ex's dog's Instagram.", "You have 1,247 unread emails. 'I'll get to them'.", "You mute people instead of unfollowing. Coward."] }
+  },
+  quotes: {
+    philosophy: { icon: '🧘', label: 'Philosophy', desc: 'Sounds profound. Means nothing.', btn: 'Enlighten Me', items: ["The only constant is change, except for vending machine prices.", "Life is like a box of chocolates — mostly disappointing, occasionally nuts.", "We're all just walking each other home, but some of us have terrible GPS.", "The universe doesn't care about you. But it has great aesthetics.", "Wisdom is knowing a tomato is a fruit. Wisdom++ is not putting it in fruit salad.", "Everything happens for a reason. Sometimes the reason is you make bad decisions.", "You miss 100% of the shots you don't take. You also miss 90% of the ones you do.", "The journey of a thousand miles begins with a single step. Then blisters.", "We're all just atoms pretending to be people. Some atoms try harder.", "Time is a flat circle. Your mistakes are a spiral."] },
+    startup: { icon: '🚀', label: 'Startup Wisdom', desc: 'Disrupt the paradigm. Synergy. Blockchain.', btn: 'Disrupt', items: ["We're disrupting the paradigm of synergistic blockchain-enabled AI-driven Web3 solutions.", "Move fast and break things. Preferably not production.", "Our MVP: Minimum Viable Pivot.", "We're the Uber for X. X = something nobody asked for.", "Series A: $10M for a todo app with blockchain.", "Growth hacking: spam but make it sound strategic.", "Our moat: we have no competitors because nobody wants this.", "Pivot #7: We're now a SaaS for left-handed hamsters.", "Hockey stick growth: flat for 3 years, then bankruptcy.", "We don't have users, we have 'early adopters who haven't churned yet'.", "Culture: free kombucha, mandatory fun, 80hr weeks."] },
+    gym: { icon: '💪', label: 'Gym Motivation', desc: 'No pain no gain. Bro science approved.', btn: 'Pump Iron', items: ["No pain no gain. Also no brain no pain.", "Squat until you see Jesus. Or your knees explode.", "Real men lift. Real smart men stretch.", "Your warmup is my max. Your form is my nightmare.", "Creatine: because water weight is still weight.", "Leg day? Never heard of her.", "Pre-workout: meth but legal and flavored.", "Mirror selfies > actual workout. Science.", "Your protein fumes are a biohazard.", "Rest days are for the weak. Injuries are for the strong."] },
+    relationship: { icon: '💘', label: 'Relationships', desc: 'From someone who\'s never dated.', btn: 'Swipe Right', items: ["Treat her like a queen. Chess queen: moves in all directions, kills everything.", "Communication is key. Also listening. Also not being weird. Good luck.", "Love is blind. Marriage is the glasses.", "Your type: emotionally unavailable. My type: you.", "Red flags are just red fabric in the wind.", "Netflix and chill ≠ marriage material.", "The ick: when they say 'pacifically' instead of 'specifically'.", "Soulmates exist. They're just dating someone else.", "Compromise: you do what she wants.", "If they wanted to, they would. Period."] },
+    lifehack: { icon: '💡', label: 'Life Hacks', desc: 'Questionably useful tips.', btn: 'Optimize', items: ["Put a dry towel in the dryer. Faster drying. You're welcome.", "Freeze grapes. Eat them frozen. Nature's popsicles.", "Dental floss cuts cake perfectly. Also cuts your finger.", "Microwave your lemon 10s. More juice. Science.", "Wooden spoon on pot stops boil-over. Witchcraft.", "Rubber band on paint can = brush wiper. Genius.", "Chill onion = no tears. Or wear goggles. Look cool.", "Bread clip fixes flip-flop blowout. MacGyver.", "Pizza box = plates. No dishes. Smart.", "Sleep with socks on. Fall asleep faster. Fight me."] },
+    corporate: { icon: '💼', label: 'Corporate Speak', desc: 'Circle back. Touch base. Let\'s sync.', btn: 'Circle Back', items: ["Let's circle back and touch base offline to synergize our deliverables.", "We need to leverage our core competencies to maximize stakeholder value.", "Per my last email... (passive aggression activated)", "Let's take this offline. Translation: you're wrong publicly.", "Quick sync? That's a 2hr meeting with no agenda.", "ASAP = yesterday. EOD = midnight. 'Urgent' = someone forgot.", "We're building the plane while flying it. Into a mountain.", "Low-hanging fruit. The only fruit we ever reach.", "Let's not boil the ocean. But we will anyway.", "This is a no-brainer. Famous last words."] }
+  },
+  wyr: {
+    classic: { icon: '⚖️', label: 'Classic', desc: 'Timeless impossible choices.', btn: 'Choose', items: ["Fight 1 horse-sized duck OR 100 duck-sized horses?", "Never use the internet again OR never use AC/heating?", "Always say everything on your mind OR never speak again?", "Fingers for toes OR toes for fingers?", "Eat only pizza forever OR never eat pizza again?", "Be 4ft tall OR 8ft tall?", "No music ever OR no movies ever?", "Always 10min late OR always 20min early?", "Teleport anywhere OR read minds?", "Live without phone OR live without toilet paper?"] },
+    gross: { icon: '🤢', label: 'Gross', desc: 'Equally disgusting options.', btn: 'Suffer', items: ["Drink a gallon of mayo OR eat a stick of butter?", "Lick a public toilet seat OR chew used gum from under a table?", "Never shower again OR never brush teeth?", "Eat a raw onion like an apple OR drink a cup of hot sauce?", "Wear wet socks forever OR have permanent sand in underwear?", "Sweat mayo OR cry ketchup?", "Poop in the only toilet at a party OR hold it 6hrs?", "Eat hair from a drain OR drink sweat from a gym sock?", "Vomit on your crush OR have them vomit on you?", "Never wipe OR never wash hands?"] },
+    superpower: { icon: '🦸', label: 'Superpowers', desc: 'Cool powers with terrible catches.', btn: 'Decide', items: ["Fly at walking speed OR run at 100mph but only backwards?", "Invisible but only when nobody looks OR super strength but only for opening jars?", "Read minds but hear everyone's thoughts 24/7 OR teleport but arrive naked?", "Talk to animals but they're all jerks OR speak all languages but only in rhymes?", "Time travel but only to your most embarrassing moments OR see future but only 10s ahead?", "Super hearing but only for people talking about you OR super smell but everything smells like farts?", "Shapeshift but only into inanimate objects OR breathe underwater but only in puddles?", "Stop time but age normally OR never age but sleep 20hrs/day?", "Telekinesis but only for spoons OR x-ray vision but only through lead?", "Immortality but alone forever OR normal life with 100 great friends?"] },
+    tech: { icon: '⌨️', label: 'Tech', desc: 'Developer dilemmas.', btn: 'Debug Life', items: ["Tabs OR spaces? (Wrong answer = exile)", "Vim OR Emacs? (War crimes either way)", "Dark mode everything OR light mode everything?", "Mac OR Windows? (Linux users: 'I use Arch btw')", "React OR Vue? (Svelte: 'am I a joke to you?')", "TypeScript OR 'I'll add types later' (never)", "Monorepo OR polyrepo? (Yes)", "CI/CD that works OR 'it works on my machine'?", "Tests OR 'we'll add them later'? (Never)", "Refactor OR rewrite? (Rewrite. Always rewrite.)"] },
+    social: { icon: '😳', label: 'Social', desc: 'Awkward situations only.', btn: 'Cringe', items: ["Accidentally send risky text to mom OR post it on LinkedIn?", "Walk in on parents OR have them walk in on you?", "Forget name of person you're talking to OR call them by ex's name?", "Laugh at funeral OR cry at comedy show?", "Trip in front of crush OR spill drink on them?", "Reply-all to company email OR send 'per my last email' to CEO?", "Voice crack during presentation OR pants split?", "Wave at stranger waving at someone behind you OR ignore friend waving?", "Food in teeth all day OR toilet paper on shoe?", "Say 'you too' to 'happy birthday' OR 'enjoy your meal'?"] },
+    existential: { icon: '🕳️', label: 'Existential', desc: 'Question your reality.', btn: 'Spiral', items: ["Know when you'll die OR how you'll die?", "Be forgotten immediately after death OR remembered for something terrible?", "Live 1000 years alone OR 40 years with true love?", "Reset life with current knowledge OR continue not knowing?", "Everyone reads your thoughts OR everyone sees your search history?", "Be the smartest person in every room OR the happiest?", "Experience every emotion intensely OR feel nothing ever?", "Know absolute truth of universe OR live in blissful ignorance?", "Relive your best day forever OR skip to a random new life?", "Be a background character in everyone's story OR the villain in yours?"] }
+  }
+};
+
+const PRANKS = [
+  () => { document.body.style.filter = 'hue-rotate(180deg)'; setTimeout(() => document.body.style.filter = '', 3000); return '🌈 Your eyes... they bleed rainbow now.'; },
+  () => { document.body.style.transform = 'rotate(180deg)'; setTimeout(() => document.body.style.transform = '', 2000); return '🔄 World flipped. You\'re welcome.'; },
+  () => { const fonts = ['"Comic Sans MS"', 'Papyrus', 'Impact', 'Wingdings']; document.body.style.fontFamily = fonts[Math.floor(Math.random() * fonts.length)]; setTimeout(() => document.body.style.fontFamily = '', 3000); return '📝 Font crime committed.'; },
+  () => { document.querySelectorAll('.card, .panel, .hero, .nav-btn, .prank-btn, .egg, .toast').forEach(el => { el.style.transition = 'all .1s'; el.style.transform = `rotate(${Math.random() * 10 - 5}deg)`; }); setTimeout(() => document.querySelectorAll('*').forEach(el => el.style.transform = ''), 2000); return '🌊 Everything is wobbly now.'; },
+  () => '🎉 CONGRATULATIONS! You won NOTHING! Absolutely nothing! Enjoy your prize of disappointment!',
+  () => { document.body.style.cursor = 'url("data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2232%22 height=%2232%22><text y=%2224%22>🤡</text></svg>"), auto'; setTimeout(() => document.body.style.cursor = '', 5000); return '🤡 You are now a certified clown. Cursor included.'; },
+  () => { const ctx = new (window.AudioContext || window.webkitAudioContext)(); const o = ctx.createOscillator(); o.frequency.value = 440; o.connect(ctx.destination); o.start(); setTimeout(() => { o.stop(); ctx.close(); }, 200); return '🔊 *BEEP* System check complete. You\'re still here.'; },
+  () => '🎭 The real prank was the friends we made along the way. Just kidding, there is no prank. Or is there?'
+];
+
+const FOOTER_QUOTES = ['Refresh for a surprise', 'Your mom visited this site', '404: Seriousness not found', 'Powered by chaos and caffeine', 'May your code compile first try', 'The cake is a lie', 'This site uses 100% organic pixels', 'Built with 🤡 and zero dependencies', 'Works offline. Because the internet is overrated.', 'No AI was harmed in the making of this website'];
+
+const KONAMI = [38,38,40,40,37,39,37,39,66,65];
+
+// =========================================
+// STATE
+// =========================================
+const state = {
+  activePanel: 'jokes',
+  stats: { jokes: 0, facts: 0, roasts: 0, quotes: 0, wyr: 0 },
+  eggClicks: 0,
+  konamiBuffer: [],
+  toastTimer: null,
+  currentModal: null,
+  currentCategory: null,
+  currentSubcategory: null
+};
+
+// =========================================
+// DOM ELEMENTS
+// =========================================
+const els = {
+  nav: document.getElementById('nav'),
+  navBtns: document.querySelectorAll('.nav-btn'),
+  panels: document.querySelectorAll('.panel'),
+  grids: {
+    jokes: document.getElementById('jokesGrid'),
+    facts: document.getElementById('factsGrid'),
+    roasts: document.getElementById('roastsGrid'),
+    quotes: document.getElementById('quotesGrid'),
+    wyr: document.getElementById('wyrGrid')
+  },
+  statEls: {
+    jokes: document.querySelector('#totalJokes .stat-num'),
+    facts: document.querySelector('#totalFacts .stat-num'),
+    roasts: document.querySelector('#totalRoasts .stat-num'),
+    quotes: document.querySelector('#totalQuotes .stat-num')
+  },
+  toast: document.getElementById('toast'),
+  prankBtn: document.getElementById('prankBtn'),
+  egg: document.getElementById('egg'),
+  footerQuote: document.getElementById('footerQuote'),
+  modals: {
+    jokes: document.getElementById('jokeModal'),
+    facts: document.getElementById('factModal'),
+    roasts: document.getElementById('roastModal'),
+    quotes: document.getElementById('quoteModal'),
+    wyr: document.getElementById('wyrModal')
+  },
+  modalBodies: {
+    jokes: document.getElementById('jokeModalBody'),
+    facts: document.getElementById('factModalBody'),
+    roasts: document.getElementById('roastModalBody'),
+    quotes: document.getElementById('quoteModalBody'),
+    wyr: document.getElementById('wyrModalBody')
+  },
+  modalTitles: {
+    jokes: document.getElementById('jokeModalTitle'),
+    facts: document.getElementById('factModalTitle'),
+    roasts: document.getElementById('roastModalTitle'),
+    quotes: document.getElementById('quoteModalTitle'),
+    wyr: document.getElementById('wyrModalTitle')
+  }
+};
+
+// =========================================
+// UTILITIES
+// =========================================
+const rand = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
+function showToast(text) {
+  clearTimeout(state.toastTimer);
+  els.toast.textContent = text;
+  els.toast.classList.add('show');
+  state.toastTimer = setTimeout(() => els.toast.classList.remove('show'), 7000);
+}
+
+function emojiBurst(count = 25) {
+  const emojis = ['😂','🤣','😭','💀','🤡','😎','🥴','🤯','😵','💩','👻','🎃','🤖','👽','🎪','🌈','✨','💫','🔥','💯'];
+  const layer = document.getElementById('emojiLayer');
+  for (let i = 0; i < count; i++) {
+    setTimeout(() => {
+      const e = document.createElement('div');
+      e.className = 'emoji';
+      e.textContent = rand(emojis);
+      e.style.left = Math.random() * 100 + 'vw';
+      e.style.animationDuration = (Math.random() * 2 + 2) + 's';
+      e.style.fontSize = (Math.random() * 1.5 + 1.5) + 'rem';
+      layer.appendChild(e);
+      setTimeout(() => e.remove(), 4500);
+    }, i * 25);
+  }
+}
+
+function updateStat(key) {
+  state.stats[key]++;
+  if (els.statEls[key]) {
+    els.statEls[key].textContent = state.stats[key];
+  }
+  saveStats();
+}
+
+function saveStats() {
+  try { localStorage.setItem('funnyStats', JSON.stringify(state.stats)); } catch {}
+}
+
+function loadStats() {
+  try {
+    const saved = JSON.parse(localStorage.getItem('funnyStats') || '{}');
+    Object.assign(state.stats, saved);
+    Object.keys(state.stats).forEach(k => {
+      if (els.statEls[k]) els.statEls[k].textContent = state.stats[k];
+    });
+  } catch {}
+}
+
+// =========================================
+// RENDER CARDS
+// =========================================
+function renderCards(panel) {
+  const data = DATA[panel];
+  const grid = els.grids[panel];
+  if (!data || !grid) return;
+
+  grid.innerHTML = '';
+  Object.keys(data).forEach(key => {
+    const cat = data[key];
+    const card = document.createElement('article');
+    card.className = 'card';
+    card.setAttribute('role', 'button');
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('aria-label', `${cat.label}: ${cat.btn}`);
+    card.dataset.category = key;
+
+    card.innerHTML = `
+      <h3>${cat.icon} ${cat.label}</h3>
+      <p>${cat.desc}</p>
+      <button class="card-btn" type="button" aria-label="${cat.btn} ${cat.label}">${cat.btn}</button>
+    `;
+
+    const btn = card.querySelector('.card-btn');
+    const trigger = (e) => {
+      if (e) e.stopPropagation();
+      openModal(panel, key);
+    };
+
+    btn.addEventListener('click', trigger);
+    card.addEventListener('click', trigger);
+    card.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); trigger(); } });
+
+    grid.appendChild(card);
+  });
+}
+
+// =========================================
+// MODAL SYSTEM
+// =========================================
+function openModal(panel, subcategory) {
+  const cat = DATA[panel][subcategory];
+  if (!cat) return;
+
+  state.currentModal = panel;
+  state.currentCategory = panel;
+  state.currentSubcategory = subcategory;
+
+  const modal = els.modals[panel];
+  const body = els.modalBodies[panel];
+  const title = els.modalTitles[panel];
+
+  // Update title
+  title.innerHTML = `${cat.icon} ${cat.label}`;
+
+  // Render items
+  body.innerHTML = cat.items.map((item, i) => `
+    <div class="modal-item" style="animation-delay: ${i * 0.05}s">
+      <span class="item-category">${cat.label}</span>
+      <span class="item-text">${item}</span>
+    </div>
+  `).join('');
+
+  // Show modal
+  modal.classList.add('show');
+  document.body.classList.add('modal-open');
+
+  // Focus management
+  const closeBtn = modal.querySelector('.modal-close');
+  setTimeout(() => closeBtn.focus(), 100);
+
+  // Stats
+  const statKey = panel === 'wyr' ? 'quotes' : panel;
+  updateStat(statKey);
+  emojiBurst(15);
+}
+
+function closeModal(panel) {
+  const modal = els.modals[panel];
+  modal.classList.remove('show');
+  document.body.classList.remove('modal-open');
+  state.currentModal = null;
+  state.currentCategory = null;
+  state.currentSubcategory = null;
+}
+
+function setupModal(panel) {
+  const modal = els.modals[panel];
+  const closeBtn = modal.querySelector('.modal-close');
+  const anotherBtn = modal.querySelector('.modal-btn.primary');
+  const closeBtn2 = modal.querySelector('.modal-btn.secondary');
+
+  closeBtn.addEventListener('click', () => closeModal(panel));
+  closeBtn2.addEventListener('click', () => closeModal(panel));
+  anotherBtn.addEventListener('click', () => {
+    closeModal(panel);
+    // Small delay then open again with random item
+    setTimeout(() => openModal(state.currentCategory, state.currentSubcategory), 100);
+  });
+
+  // Click overlay to close
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal(panel);
+  });
+
+  // ESC key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && state.currentModal === panel) {
+      closeModal(panel);
+    }
+  });
+}
+
+// =========================================
+// NAVIGATION
+// =========================================
+function switchPanel(target) {
+  state.activePanel = target;
+  els.navBtns.forEach(btn => {
+    const isActive = btn.dataset.target === target;
+    btn.classList.toggle('active', isActive);
+    btn.setAttribute('aria-selected', isActive);
+  });
+  els.panels.forEach(panel => {
+    const isActive = panel.id === target;
+    panel.hidden = !isActive;
+    if (isActive) {
+      panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+}
+
+// =========================================
+// PRANK BUTTON
+// =========================================
+function triggerPrank() {
+  const prank = rand(PRANKS);
+  const msg = prank();
+  showToast(msg);
+  emojiBurst(40);
+}
+
+// =========================================
+// EASTER EGGS
+// =========================================
+function handleEgg() {
+  state.eggClicks++;
+  if (state.eggClicks >= 7) {
+    showToast('🥚 You found the golden egg! You win... absolutely nothing. But you have honor.');
+    emojiBurst(50);
+    state.eggClicks = 0;
+  }
+}
+
+function handleKonami(e) {
+  state.konamiBuffer.push(e.keyCode);
+  if (state.konamiBuffer.length > 10) state.konamiBuffer.shift();
+  if (state.konamiBuffer.join(',') === KONAMI.join(',')) {
+    showToast('🎮 KONAMI CODE ACTIVATED! You are now a 10x developer. God mode: ON.');
+    document.body.style.animation = 'rainbow 2s linear infinite';
+    emojiBurst(60);
+    setTimeout(() => document.body.style.animation = '', 10000);
+    state.konamiBuffer = [];
+  }
+}
+
+// =========================================
+// BACKGROUND CANVAS
+// =========================================
+function initCanvas() {
+  const canvas = document.getElementById('bg');
+  const ctx = canvas.getContext('2d');
+  let w, h, particles = [], mouse = { x: -9999, y: -9999 };
+
+  function resize() {
+    w = canvas.width = innerWidth;
+    h = canvas.height = innerHeight;
+  }
+
+  class Particle {
+    constructor() { this.reset(); }
+    reset() {
+      this.x = Math.random() * w;
+      this.y = Math.random() * h;
+      this.size = Math.random() * 2 + 0.5;
+      this.speedX = (Math.random() - 0.5) * 0.4;
+      this.speedY = (Math.random() - 0.5) * 0.4;
+      const hue = Math.random() * 60 + 330;
+      this.color = `hsl(${hue}, 80%, 60%)`;
+      this.opacity = Math.random() * 0.4 + 0.1;
+    }
+    update() {
+      this.x += this.speedX;
+      this.y += this.speedY;
+      const dx = mouse.x - this.x, dy = mouse.y - this.y;
+      const dist = Math.hypot(dx, dy);
+      if (dist < 150) {
+        const force = (150 - dist) / 150 * 0.05;
+        this.x -= dx / dist * force;
+        this.y -= dy / dist * force;
+      }
+      if (this.x < 0 || this.x > w || this.y < 0 || this.y > h) this.reset();
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fillStyle = this.color;
+      ctx.globalAlpha = this.opacity;
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    }
+  }
+
+  function init() {
+    particles = [];
+    const count = Math.min(120, Math.floor((w * h) / 15000));
+    for (let i = 0; i < count; i++) particles.push(new Particle());
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, w, h);
+    particles.forEach(p => { p.update(); p.draw(); });
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.hypot(dx, dy);
+        if (dist < 100) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = particles[i].color;
+          ctx.globalAlpha = (1 - dist / 100) * 0.08;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+          ctx.globalAlpha = 1;
+        }
+      }
+    }
+    requestAnimationFrame(animate);
+  }
+
+  window.addEventListener('resize', () => { resize(); init(); }, { passive: true });
+  window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; }, { passive: true });
+  window.addEventListener('touchmove', e => { if (e.touches[0]) { mouse.x = e.touches[0].clientX; mouse.y = e.touches[0].clientY; } }, { passive: true });
+
+  resize(); init(); animate();
+}
+
+// =========================================
+// RAINBOW ANIMATION FOR KONAMI
+// =========================================
+const style = document.createElement('style');
+style.textContent = '@keyframes rainbow { 0% { filter: hue-rotate(0deg); } 100% { filter: hue-rotate(360deg); } }';
+document.head.appendChild(style);
+
+// =========================================
+// INIT
+// =========================================
+function init() {
+  loadStats();
+  Object.keys(DATA).forEach(renderCards);
+  switchPanel('jokes');
+
+  // Nav
+  els.navBtns.forEach(btn => {
+    btn.addEventListener('click', () => switchPanel(btn.dataset.target));
+  });
+
+  // Modals
+  Object.keys(DATA).forEach(setupModal);
+
+  // Prank
+  els.prankBtn.addEventListener('click', triggerPrank);
+
+  // Egg
+  els.egg.addEventListener('click', handleEgg);
+
+  // Konami
+  document.addEventListener('keydown', handleKonami);
+
+  // Canvas
+  initCanvas();
+
+  // Footer quote
+  els.footerQuote.textContent = rand(FOOTER_QUOTES);
+
+  console.log('%c🤡 Funny People Only loaded', 'font-size: 20px; color: #ff006e;');
+  console.log('%cKonami code: ↑↑↓↓←→←→BA', 'color: #8338ec;');
+  console.log('%cClick the egg 7 times...', 'color: #ffbe0b;');
+  console.log('%cClick any card → opens a modal with ALL items', 'color: #06ffa5;');
+}
+
+document.readyState === 'loading'
+  ? document.addEventListener('DOMContentLoaded', init)
+  : init();
+
+// Service Worker Registration
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch(() => {});
+  });
+}
+</script>
+</body>
+</html>

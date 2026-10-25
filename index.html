@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Funny People Only — Jokes, roasts, useless facts, fake quotes, and impossible choices. Mobile-first, zero dependencies, works offline.">
+<meta name="theme-color" content="#0d0d0d">
+<title>🤡 Funny People Only</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap"></noscript>
+<link rel="stylesheet" href="css/styles.css">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤡</text></svg>">
+</head>
+<body>
+<canvas id="bg" aria-hidden="true"></canvas>
+<div class="emoji-layer" id="emojiLayer" aria-hidden="true"></div>
+
+<header class="header" role="banner">
+<nav class="nav" id="nav" role="navigation" aria-label="Main categories">
+<button class="nav-btn" data-target="jokes" aria-controls="jokes">🎭 Jokes</button>
+<button class="nav-btn" data-target="facts" aria-controls="facts">🧠 Facts</button>
+<button class="nav-btn" data-target="roasts" aria-controls="roasts">🔥 Roasts</button>
+<button class="nav-btn" data-target="quotes" aria-controls="quotes">💭 Quotes</button>
+<button class="nav-btn" data-target="wyr" aria-controls="wyr">🤔 WYR</button>
+</nav>
+</header>
+
+<main id="main" role="main">
+<section class="hero" aria-labelledby="hero-title">
+<h1 id="hero-title">Funny People Only</h1>
+<p class="hero-tagline">If you're not laughing, you're not doing it right</p>
+<div class="hero-stats" aria-live="polite">
+<span class="stat" id="totalJokes"><span class="stat-num">0</span><span class="stat-label">Jokes</span></span>
+<span class="stat" id="totalFacts"><span class="stat-num">0</span><span class="stat-label">Facts</span></span>
+<span class="stat" id="totalRoasts"><span class="stat-num">0</span><span class="stat-label">Roasts</span></span>
+<span class="stat" id="totalQuotes"><span class="stat-num">0</span><span class="stat-label">Quotes</span></span>
+</div>
+</section>
+
+<section id="jokes" class="panel" role="region" aria-labelledby="jokes-title" hidden>
+<header class="panel-header">
+<h2 id="jokes-title">🎭 Joke Generator</h2>
+<p class="panel-desc">Six flavors. Infinite eye-rolls.</p>
+</header>
+<div class="grid" id="jokesGrid"></div>
+</section>
+
+<section id="facts" class="panel" role="region" aria-labelledby="facts-title" hidden>
+<header class="panel-header">
+<h2 id="facts-title">🧠 Useless Facts</h2>
+<p class="panel-desc">Knowledge you never needed. Guaranteed.</p>
+</header>
+<div class="grid" id="factsGrid"></div>
+</section>
+
+<section id="roasts" class="panel" role="region" aria-labelledby="roasts-title" hidden>
+<header class="panel-header">
+<h2 id="roasts-title">🔥 Gentle Roasts</h2>
+<p class="panel-desc">Consensual verbal violence. You asked for it.</p>
+</header>
+<div class="grid" id="roastsGrid"></div>
+</section>
+
+<section id="quotes" class="panel" role="region" aria-labelledby="quotes-title" hidden>
+<header class="panel-header">
+<h2 id="quotes-title">💭 Fake Deep Quotes</h2>
+<p class="panel-desc">Sounds profound. Means absolutely nothing.</p>
+</header>
+<div class="grid" id="quotesGrid"></div>
+</section>
+
+<section id="wyr" class="panel" role="region" aria-labelledby="wyr-title" hidden>
+<header class="panel-header">
+<h2 id="wyr-title">🤔 Would You Rather</h2>
+<p class="panel-desc">Impossible choices. No right answers.</p>
+</header>
+<div class="grid" id="wyrGrid"></div>
+</section>
+</main>
+
+<aside class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></aside>
+
+<button class="prank-btn" id="prankBtn" aria-label="Trigger a random prank" type="button">🚨 DO NOT PRESS 🚨</button>
+
+<button class="egg" id="egg" aria-label="Easter egg" type="button">🥚</button>
+
+<footer class="footer" role="contentinfo">
+<p>Made with chaos for funny people • Zero dependencies • Works offline • <a href="https://github.com" target="_blank" rel="noopener">Fork on GitHub</a></p>
+<p id="footerQuote" class="footer-quote"></p>
+</footer>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

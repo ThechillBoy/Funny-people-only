@@ -1,0 +1,28 @@
+# Local credentials and environment configuration
+.env
+.env.*
+!.env.example
+!.env.sample
+.npmrc
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Generated dependencies, build outputs, and caches
+node_modules/
+dist/
+build/
+coverage/
+.cache/
+.parcel-cache/
+*.log
+*.tsbuildinfo
+
+# Operating system and editor temporary files
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*.swo
+*~

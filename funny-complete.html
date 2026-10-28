@@ -126,11 +126,20 @@ a{color:var(--accent-3);text-decoration:none;transition:color var(--transition-f
 .modal-btn.secondary{background:var(--card);border:1px solid var(--border);color:var(--fg)}
 .modal-btn.secondary:hover{border-color:var(--accent);color:var(--accent)}
 @media print{.header,.prank-btn,.egg,.toast,#bg,.emoji-layer,.modal-overlay{display:none!important}.panel{display:none!important}.panel:not([hidden]){display:block!important}body{background:white;color:black}.card{border:1px solid #ccc;background:white;box-shadow:none}.card-btn{background:#333;color:white}}
+
+.sound-toggle{position:fixed;top:calc(var(--header-h) + 12px);right:16px;z-index:250;display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:10px 14px;font-size:clamp(12px,2vw,14px);font-weight:700;color:var(--fg);background:var(--card);border:1px solid var(--border);border-radius:var(--radius-full);box-shadow:var(--shadow-sm);transition:all var(--transition-fast)}
+.sound-toggle:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
+.sound-toggle:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+@media(max-width:480px){.sound-toggle{top:calc(var(--header-h) + 10px);right:8px;padding:8px 10px;font-size:11px}}
+@media(prefers-reduced-motion:reduce){.sound-toggle{transition:none}}
+
 </style>
 </head>
 <body>
 <canvas id="bg" aria-hidden="true"></canvas>
 <div class="emoji-layer" id="emojiLayer" aria-hidden="true"></div>
+
+<button class="sound-toggle" id="soundToggle" type="button" aria-pressed="true" aria-label="Turn sound effects off">🔊 Sound ON</button>
 
 <header class="header" role="banner">
 <nav class="nav" id="nav" role="navigation" aria-label="Main categories">
@@ -401,11 +410,98 @@ const els = {
 };
 
 // =========================================
+// SOUND EFFECTS — synthesized locally with Web Audio; no audio files required
+// Browsers require a user gesture before audio can play.
+// =========================================
+const sound = (() => {
+  let audioContext = null;
+  let enabled = true;
+  let volume = 0.22;
+
+  function getContext() {
+    if (!audioContext) {
+      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContextClass) return null;
+      audioContext = new AudioContextClass();
+    }
+    if (audioContext.state === 'suspended') audioContext.resume().catch(() => {});
+    return audioContext;
+  }
+
+  function tone({ frequency = 440, endFrequency = frequency, duration = 0.12, type = 'sine', gain = 0.16, delay = 0 } = {}) {
+    if (!enabled) return;
+    const ctx = getContext();
+    if (!ctx) return;
+    try {
+      const start = ctx.currentTime + delay;
+      const oscillator = ctx.createOscillator();
+      const envelope = ctx.createGain();
+      oscillator.type = type;
+      oscillator.frequency.setValueAtTime(Math.max(40, frequency), start);
+      oscillator.frequency.exponentialRampToValueAtTime(Math.max(40, endFrequency), start + duration);
+      envelope.gain.setValueAtTime(0.0001, start);
+      envelope.gain.exponentialRampToValueAtTime(Math.max(0.0002, gain * volume), start + 0.012);
+      envelope.gain.exponentialRampToValueAtTime(0.0001, start + duration);
+      oscillator.connect(envelope);
+      envelope.connect(ctx.destination);
+      oscillator.start(start);
+      oscillator.stop(start + duration + 0.02);
+    } catch (error) {
+      console.debug('Sound effect unavailable:', error);
+    }
+  }
+
+  const patterns = {
+    click: () => tone({ frequency: 620, endFrequency: 420, duration: 0.055, type: 'square', gain: 0.055 }),
+    card: () => { tone({ frequency: 440, endFrequency: 660, duration: 0.09, type: 'triangle', gain: 0.1 }); tone({ frequency: 660, endFrequency: 880, duration: 0.09, type: 'triangle', gain: 0.075, delay: 0.07 }); },
+    joke: () => { tone({ frequency: 520, endFrequency: 760, duration: 0.08, type: 'sine', gain: 0.1 }); tone({ frequency: 760, endFrequency: 360, duration: 0.2, type: 'triangle', gain: 0.12, delay: 0.09 }); },
+    fact: () => { tone({ frequency: 480, endFrequency: 720, duration: 0.11, type: 'sine', gain: 0.095 }); tone({ frequency: 720, endFrequency: 960, duration: 0.13, type: 'sine', gain: 0.085, delay: 0.1 }); },
+    roast: () => { tone({ frequency: 220, endFrequency: 110, duration: 0.18, type: 'sawtooth', gain: 0.085 }); tone({ frequency: 150, endFrequency: 90, duration: 0.17, type: 'square', gain: 0.05, delay: 0.14 }); },
+    quote: () => { tone({ frequency: 660, endFrequency: 880, duration: 0.17, type: 'sine', gain: 0.07 }); tone({ frequency: 880, endFrequency: 660, duration: 0.22, type: 'sine', gain: 0.06, delay: 0.15 }); },
+    wyr: () => { tone({ frequency: 440, endFrequency: 440, duration: 0.07, type: 'triangle', gain: 0.09 }); tone({ frequency: 520, endFrequency: 520, duration: 0.07, type: 'triangle', gain: 0.09, delay: 0.09 }); },
+    prank: () => { tone({ frequency: 620, endFrequency: 180, duration: 0.32, type: 'sawtooth', gain: 0.1 }); tone({ frequency: 330, endFrequency: 660, duration: 0.17, type: 'square', gain: 0.045, delay: 0.28 }); },
+    egg: () => { tone({ frequency: 520, endFrequency: 780, duration: 0.1, type: 'sine', gain: 0.09 }); tone({ frequency: 780, endFrequency: 1040, duration: 0.13, type: 'sine', gain: 0.09, delay: 0.1 }); },
+    success: () => { tone({ frequency: 523, endFrequency: 659, duration: 0.12, type: 'sine', gain: 0.1 }); tone({ frequency: 659, endFrequency: 784, duration: 0.12, type: 'sine', gain: 0.1, delay: 0.11 }); tone({ frequency: 784, endFrequency: 1046, duration: 0.2, type: 'sine', gain: 0.11, delay: 0.22 }); }
+  };
+
+  function play(name = 'click') {
+    if (patterns[name]) patterns[name]();
+    else patterns.click();
+  }
+
+  function setEnabled(value) {
+    enabled = Boolean(value);
+    try { localStorage.setItem('funnySoundsEnabled', enabled ? '1' : '0'); } catch {}
+    updateButton();
+    if (enabled) play('success');
+  }
+
+  function updateButton() {
+    const button = document.getElementById('soundToggle');
+    if (button) {
+      button.textContent = enabled ? '🔊 Sound ON' : '🔇 Sound OFF';
+      button.setAttribute('aria-pressed', String(enabled));
+      button.setAttribute('aria-label', enabled ? 'Turn sound effects off' : 'Turn sound effects on');
+    }
+  }
+
+  function init() {
+    try { enabled = localStorage.getItem('funnySoundsEnabled') !== '0'; } catch {}
+    const button = document.getElementById('soundToggle');
+    if (button) button.addEventListener('click', () => setEnabled(!enabled));
+    updateButton();
+  }
+
+  return { play, init };
+})();
+
+// =========================================
 // UTILITIES
 // =========================================
 const rand = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
 function showToast(text) {
+  sound.play('click');
   clearTimeout(state.toastTimer);
   els.toast.textContent = text;
   els.toast.classList.add('show');
@@ -496,6 +592,7 @@ function openModal(panel, subcategory) {
   const cat = DATA[panel][subcategory];
   if (!cat) return;
 
+  sound.play(panel === 'jokes' ? 'joke' : panel === 'facts' ? 'fact' : panel === 'roasts' ? 'roast' : panel === 'quotes' ? 'quote' : 'wyr');
   state.currentModal = panel;
   state.currentCategory = panel;
   state.currentSubcategory = subcategory;
@@ -569,6 +666,7 @@ function setupModal(panel) {
 // NAVIGATION
 // =========================================
 function switchPanel(target) {
+  if (state.activePanel !== target) sound.play('card');
   state.activePanel = target;
   els.navBtns.forEach(btn => {
     const isActive = btn.dataset.target === target;
@@ -588,6 +686,7 @@ function switchPanel(target) {
 // PRANK BUTTON
 // =========================================
 function triggerPrank() {
+  sound.play('prank');
   const prank = rand(PRANKS);
   const msg = prank();
   showToast(msg);
@@ -598,6 +697,7 @@ function triggerPrank() {
 // EASTER EGGS
 // =========================================
 function handleEgg() {
+  sound.play('egg');
   state.eggClicks++;
   if (state.eggClicks >= 7) {
     showToast('🥚 You found the golden egg! You win... absolutely nothing. But you have honor.');
@@ -713,8 +813,16 @@ document.head.appendChild(style);
 // =========================================
 function init() {
   loadStats();
+  sound.init();
   Object.keys(DATA).forEach(renderCards);
   switchPanel('jokes');
+
+  // Lightweight UI click sounds, delegated to avoid duplicate listeners.
+  document.addEventListener('click', (event) => {
+    const target = event.target instanceof Element ? event.target.closest('button, a, [role="button"]') : null;
+    if (!target || target.id === 'soundToggle' || target.classList.contains('nav-btn') || target.classList.contains('card-btn') || target.classList.contains('modal-close') || target.classList.contains('modal-btn') || target.id === 'prankBtn' || target.id === 'egg') return;
+    sound.play('click');
+  });
 
   // Nav
   els.navBtns.forEach(btn => {

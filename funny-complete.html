@@ -95,15 +95,20 @@ a{color:var(--accent-3);text-decoration:none;transition:color var(--transition-f
 .shake{animation:shake 0.5s ease-in-out}
 ::-webkit-scrollbar{width:8px;height:8px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}::-webkit-scrollbar-thumb:hover{background:var(--accent)}
 ::selection{background:rgba(255,0,110,.3);color:var(--fg)}
-.modal-overlay{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.9);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;visibility:hidden;transition:all var(--transition-base)}
+.modal-overlay{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.9);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:clamp(12px,3vh,28px) 16px;box-sizing:border-box;overflow-y:auto;overscroll-behavior:contain;opacity:0;visibility:hidden;transition:opacity var(--transition-base),visibility var(--transition-base)}
 .modal-overlay.show{opacity:1;visibility:visible}
-.modal{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);max-width:90vw;max-height:85vh;width:100%;max-width:600px;overflow:hidden;transform:scale(0.9);transition:transform var(--transition-base)}
+.modal{position:relative;margin:auto;flex:0 1 600px;width:min(600px,100%);max-width:600px;max-height:min(82dvh,760px);min-height:0;display:flex;flex-direction:column;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transform:scale(.97);transition:transform var(--transition-base)}
 .modal-overlay.show .modal{transform:scale(1)}
+.modal-header{flex:0 0 auto}
+.modal-body{padding:clamp(16px,3vw,24px);overflow-y:auto;overscroll-behavior:contain;min-height:0;max-height:none;flex:1 1 auto}
+.modal-actions{flex:0 0 auto}
+@media(max-height:540px){.modal-overlay{align-items:flex-start;padding:8px}.modal{max-height:calc(100dvh - 16px)}.modal-header{padding:12px 16px}.modal-body{padding:12px 16px}.modal-actions{padding:12px 16px}}
+
 .modal-header{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid var(--border);background:linear-gradient(135deg,var(--accent),var(--accent-2));color:var(--bg)}
 .modal-header h3{font-size:clamp(1.1rem,3vw,1.4rem);font-weight:700;display:flex;align-items:center;gap:10px}
 .modal-close{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,255,255,.1);color:var(--bg);font-size:1.5rem;transition:all var(--transition-fast)}
 .modal-close:hover{background:rgba(255,255,255,.2);transform:rotate(90deg)}
-.modal-body{padding:24px;overflow-y:auto;max-height:60vh}
+
 .modal-item{padding:16px 0;border-bottom:1px solid var(--border);animation:fadeInUp 0.4s ease-out backwards}
 .modal-item:last-child{border-bottom:none}
 .modal-item:nth-child(1){animation-delay:0.05s}
@@ -612,13 +617,16 @@ function openModal(panel, subcategory) {
     </div>
   `).join('');
 
-  // Show modal
+  // Show modal. Keep the overlay centered in the viewport and prevent page scrolling behind it.
   modal.classList.add('show');
   document.body.classList.add('modal-open');
+  modal.setAttribute('aria-hidden', 'false');
+  modal.scrollTop = 0;
+  body.scrollTop = 0;
 
   // Focus management
   const closeBtn = modal.querySelector('.modal-close');
-  setTimeout(() => closeBtn.focus(), 100);
+  setTimeout(() => closeBtn.focus({ preventScroll: true }), 80);
 
   // Stats
   const statKey = panel === 'wyr' ? 'quotes' : panel;
@@ -628,25 +636,30 @@ function openModal(panel, subcategory) {
 
 function closeModal(panel) {
   const modal = els.modals[panel];
+  if (modal.classList.contains('show')) sound.play('click');
   modal.classList.remove('show');
+  modal.setAttribute('aria-hidden', 'true');
   document.body.classList.remove('modal-open');
   state.currentModal = null;
-  state.currentCategory = null;
-  state.currentSubcategory = null;
 }
 
 function setupModal(panel) {
   const modal = els.modals[panel];
+  modal.setAttribute('aria-hidden', 'true');
   const closeBtn = modal.querySelector('.modal-close');
   const anotherBtn = modal.querySelector('.modal-btn.primary');
   const closeBtn2 = modal.querySelector('.modal-btn.secondary');
 
+  closeBtn.setAttribute('type', 'button');
   closeBtn.addEventListener('click', () => closeModal(panel));
   closeBtn2.addEventListener('click', () => closeModal(panel));
   anotherBtn.addEventListener('click', () => {
+    // Keep the selected category before closeModal clears the active modal state.
+    const category = state.currentCategory;
+    const subcategory = state.currentSubcategory;
+    sound.play('success');
     closeModal(panel);
-    // Small delay then open again with random item
-    setTimeout(() => openModal(state.currentCategory, state.currentSubcategory), 100);
+    setTimeout(() => openModal(category || panel, subcategory), 100);
   });
 
   // Click overlay to close
@@ -677,7 +690,8 @@ function switchPanel(target) {
     const isActive = panel.id === target;
     panel.hidden = !isActive;
     if (isActive) {
-      panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Only scroll when the user changes categories; preserve the current viewport otherwise.
+      panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
   });
 }
@@ -819,8 +833,8 @@ function init() {
 
   // Lightweight UI click sounds, delegated to avoid duplicate listeners.
   document.addEventListener('click', (event) => {
-    const target = event.target instanceof Element ? event.target.closest('button, a, [role="button"]') : null;
-    if (!target || target.id === 'soundToggle' || target.classList.contains('nav-btn') || target.classList.contains('card-btn') || target.classList.contains('modal-close') || target.classList.contains('modal-btn') || target.id === 'prankBtn' || target.id === 'egg') return;
+    const target = event.target instanceof Element ? event.target.closest('button, a, [role="button"], input[type="button"], input[type="submit"]') : null;
+    if (!target || target.disabled || target.id === 'soundToggle' || target.classList.contains('nav-btn') || target.classList.contains('card-btn') || target.classList.contains('modal-close') || target.classList.contains('modal-btn') || target.id === 'prankBtn' || target.id === 'egg') return;
     sound.play('click');
   });
 
